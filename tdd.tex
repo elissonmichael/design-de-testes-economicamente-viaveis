@@ -1,0 +1,59 @@
+%-------------------------------- Configurações --------------------------------
+
+\documentclass[a4paper, abntfigtabnum, noindentfirst, normaltoc, pnumplain, notimes]{abnt}
+
+\newcommand{\bc}{NavyBlue}
+
+\usepackage[Sonny]{fncychap}
+\usepackage{subfigure}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[pdfborder={0 0 0},pdfborderstyle={/S/U/W 0.5},citebordercolor=\bc,filebordercolor=\bc,urlbordercolor=\bc,linkbordercolor=\bc]{hyperref}
+\usepackage[alf]{abntcite}
+\usepackage{booktabs} % para utilização das linhas separadoras na tabela
+\usepackage{textcomp}
+\usepackage{amsmath}
+
+%----------------------- Números de Figuras e Tabelas no Formato Capítulo.número_da_Figura ------------------------
+
+\newcommand{\Chapter}[1]{\chapter{#1} \setcounter{figure}{0} \setcounter{table}{0}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+
+%----------------------- Quebra de linha após paragraph ------------------------
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+%--------------------------------- Informações ---------------------------------
+
+\newcommand{\meutitulo}{Design de Testes Economicamente Viáveis}
+
+\hypersetup{
+  pdftitle=\meutitulo,
+  pdfauthor=Élisson Michael Fernandes Meirelles Araújo
+}
+
+\begin{document}
+
+  \titulo{\meutitulo}
+  \autor{Élisson Michael Fernandes Meirelles Araújo}
+  \local{Campos dos Goytacazes - RJ}
+  \data{2018}
+
+  \input{tex/poodir_capitulo_9}
+
+
+  %--------------------------------- Bibliografia ------------------------------
+
+  \citeoption{abnt-repeated-author-omit=yes}
+  \bibliographystyle{abnt-alf}
+  \bibliography{bibliografia}
+\end{document}
+
