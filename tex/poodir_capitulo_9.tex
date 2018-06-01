@@ -32,4 +32,24 @@ Esses benefícios, apesar de válidos, são representações para um objetivo ma
 
 A solução para o problema de testes custosos, no entanto, não é parar de testar, mas se tornar melhor nisso ao invés. Obter um bom retorno dos testes requer clareza de intenção e saber o que, quando e como testar.
 
+\section{Conhecendo as suas Intenções}
 
+Testar tem muito benefícios em potencial, alguns óbvios, outros mais obscuros. Uma compreensão completa desses benefícios vai aumentar a sua motivação para alcança-los.
+
+\subsection{Encontrando \textit{bugs}}
+
+Encontrar falhas, ou \textit{bugs}, cedo no processo de desenvolvimento rendem grandes dividendos. Não apenas é mais fácil encontrar e corrigir um \textit{bug} quanto mais próximo da sua época de criação, mas conseguir o código certo mais cedo do que mais tarde pode ter um efeito positivo não esperado no \textit{design} resultante.
+
+Saber que você pode (ou não pode) fazer algo mais cedo talvez façam você escolher alternativas no dia presente que alteram as opções de \textit{design} disponíveis no futuro. Além disso, conforme o código se acumula, \textit{bugs} incorporados acumulam dependências. Corrigir esses \textit{bugs} mais tarde no processo pode necessitar da mudança de muito código com dependências. Corrigir esses \textit{bugs} mais cedo sempre custa menos.
+
+\subsection{Fornecimento de Documentação}
+
+Testes providenciam a única documentação confiável de \textit{design}. A história que eles contam permanecem verdadeiras muito tempo depois que a documentos em papel se tornam obsoletos e a memória humana falha. Escreva seus testes como se você esperasse que o seu futuro eu tenha amnésia. Lembre-se que você vai esquecer; escreva testes que te lembrem da história que uma vez você teve. 
+
+\subsection{Adiando Decisões de \textit{Design}}
+
+Testes permitem que você adie de forma segura decisões de \textit{design}. Conforme as suas habilidades de \textit{design} melhoram você vai começar a escrever aplicações que estão semeadas com lugares onde você sabe que o \textit{design} precisa de alguma coisa, mas você não tem ainda informações suficientes para saber exatamente o que. Esses são os lugares onde você está aguardando informações adicionais, resistindo de forma valente as forças que obrigam você a se cometer a um \textit{design} específico.
+
+Esses pontos de decisão ''pendente'' são frequentemente codificados como \textit{hacks} concretos levemente embaraçosos escondidos atrás de interfaces totalmente apresentáveis. Essa situação ocorre quando você está ciente de um caso concreto no presente, mas você espera totalmente que novos casos chegarão em um futuro próximo. Você sabe que em algum ponto você vai estar melhor servido por código que controla melhor esses muitos casos concretos em uma única abstração, mas exatamente agora você não tem informação suficiente para antecipar qual será essa abstração.
+
+Quando seus testes dependem de interfaces você pode refatorar o código por baixo com total desapego. Os testes verificam a continuação do bom comportamento da interface e mudanças no código subjacente não forçam a reescrita dos testes. Depender intencionalmente em interfaces permite que você use testes para postergar decisões de \textit{design} com segurança e sem penalidade alguma.  
