@@ -1,7 +1,17 @@
 \Chapter{\textit{Design} de Testes Economicamente Viáveis}
 
-\cite{Sandi} afirma que escrever código que muda é uma arte a qual a prática depende de três habilidades diferentes. 
+\cite{Sandi} afirma que escrever código que muda é uma arte a qual a prática depende de três habilidades diferentes.
+
+Primeiro, você precisa entender \textit{design} orientado a objetos. Código com \textit{design} pobre é naturalmente difícil de alterar. De um ponto de vista prático, a capacidade de alteração é a única métrica de \textit{design} que importa; código que é fácil de mudar tem um bom \textit{design}. Se você chegou até aqui é justo supor que você já tem uma base pela qual começar a praticar a escrita de código fácil de alterar.
+
+Segundo, você deve ser habilidoso em refatoração de código. Não no sentido casual de "vá até a sua aplicação e tire algumas coisas", mas no sentido real, maduro, à prova de balas definido por Martin Fowler no livro \textit{Refactoring: Improving the Design of Existing Code}\cite{Fowler1999}:
+
+\say{Refatoração é o processo de mudar um sistema de software de um modo que não altere o comportamento externo do código, mas melhore a estrutura interna.}
+
+Repare na parte \textit{não altere o comportamento externo do código}. Refatorar, em sua definição formal, não adiciona novo comportamento, ele melhora a estrutura existente. É um processo preciso que altera código via passos muito pequenos, cuidadosos, incrementais que infalivelmente transforma um \textit{design} em outro.
+
+Bom \textit{design} preserva flexibilidade máxima no menor custo ao adiar decisões a cada oportunidade. Postergando qualquer comprometimento até que requerimentos mais específicos cheguem.
 
 \section{Testando Intencionalmente}
 
-Os argumentos mais comuns a favor de se ter testes é o de que eles reduzem bugs, fornecem documentação e que escrever testes primeiro melhora o \textit{design} da aplicação. 
+Os argumentos mais comuns a favor de se ter testes é o de que eles reduzem \textit{bugs}, fornecem documentação e que escrever testes primeiro melhora o \textit{design} da aplicação. 
