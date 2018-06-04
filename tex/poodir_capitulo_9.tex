@@ -53,3 +53,24 @@ Testes permitem que você adie de forma segura decisões de \textit{design}. Con
 Esses pontos de decisão ''pendente'' são frequentemente codificados como \textit{hacks} concretos levemente embaraçosos escondidos atrás de interfaces totalmente apresentáveis. Essa situação ocorre quando você está ciente de um caso concreto no presente, mas você espera totalmente que novos casos chegarão em um futuro próximo. Você sabe que em algum ponto você vai estar melhor servido por código que controla melhor esses muitos casos concretos em uma única abstração, mas exatamente agora você não tem informação suficiente para antecipar qual será essa abstração.
 
 Quando seus testes dependem de interfaces você pode refatorar o código por baixo com total desapego. Os testes verificam a continuação do bom comportamento da interface e mudanças no código subjacente não forçam a reescrita dos testes. Depender intencionalmente em interfaces permite que você use testes para postergar decisões de \textit{design} com segurança e sem penalidade alguma.  
+
+\subsection{Suporte para Abstrações}
+
+Quando mais informações finalmente chegarem e você tomar a próxima decisão de \textit{design}, você vai alterar o código de maneiras que aumentem seu nível de abstração. Onde mora outros benefícios de testes no \textit{design}.
+
+Bom \textit{design} naturalmente progride em direção a pequenos objetos independentes que dependem de abstrações. O comportamento de aplicações com bom \textit{design} gradualmente são o resultado de interações entre essas abstrações. Abstrações são componentes de \textit{design} maravilhosamente flexíveis, mas as melhorias que eles fornecem vêm com um pequeno custo: Enquanto cada abstração possa ser fácil de entender individualmente, não há um único local no código que torne óbvio o comportamento do todo.
+
+Conforme a base de código cresce e o número de abstrações aumenta, testes se tornam cada vez mais necessários. Há um nível de abstração em \textit{design} onde é quase impossível fazer qualquer alteração de forma segura a menos que o código tenha testes. Testes são os registros das interfaces de cada abstração e como tal eles são a sua proteção. Eles permitem que você adie decisões de \textit{design} e crie abstrações em qualquer nível de profundidade útil.
+
+\subsection{Expondo Falhas de \textit{Design}}
+
+O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outro objetos irão achar difícil reutilizar o código. 
+
+Quando o \textit{design} é ruim, testar é difícil. No entanto, não é garantido que o inverso seja verdade. Testes custosos não necessariamente significam que a aplicação tem \textit{design} pobre. É tecnicamente possível escrever testes ruins para código com bom \textit{design}. Assim sendo, para testes diminuírem seus custos, tanto a aplicação subjacente e os testes precisam ter bom \textit{design}.
+
+Seu objetivo é ganhar todos os benefícios dos testes pelo menor custo possível. O melhor jeito de alcançar esse objetivo é escrever testes fracamente acoplados apenas sobre as coisas que importam.
+
+\section{Sabendo o que Testar}
+
+A maioria dos programadores escrevem testes demais. Isso não é sempre óbvio porque em muitos casos o custo desses testes desnecessários são tão altos que os programadores envolvidos já desistiram de testar completamente. Não é que eles não têm testes. Eles têm uma grande, mas obsoleta suíte de testes, que nunca roda. Um jeito simples de obter melhores utilidades dos testes é escrever menos deles. O jeito mais seguro de conseguir isso é testar tudo apenas uma vez e no lugar certo. 
+
