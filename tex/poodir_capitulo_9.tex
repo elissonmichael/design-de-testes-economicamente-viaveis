@@ -44,7 +44,7 @@ Saber que você pode (ou não pode) fazer algo mais cedo talvez façam você esc
 
 \subsection{Fornecimento de Documentação}
 
-Testes providenciam a única documentação confiável de \textit{design}. A história que eles contam permanecem verdadeiras muito tempo depois que a documentos em papel se tornam obsoletos e a memória humana falha. Escreva seus testes como se você esperasse que o seu futuro eu tenha amnésia. Lembre-se que você vai esquecer; escreva testes que te lembrem da história que uma vez você teve. 
+Testes providenciam a única documentação confiável de \textit{design}. A história que eles contam permanecem verdadeiras muito tempo depois que a documentos em papel se tornam obsoletos e a memória humana falha. Escreva seus testes como se você esperasse que o seu futuro eu tenha amnésia. Lembre-se que você vai esquecer; escreva testes que te lembrem da história que uma vez você viveu. 
 
 \subsection{Adiando Decisões de \textit{Design}}
 
@@ -73,4 +73,23 @@ Seu objetivo é ganhar todos os benefícios dos testes pelo menor custo possíve
 \section{Sabendo o que Testar}
 
 A maioria dos programadores escrevem testes demais. Isso não é sempre óbvio porque em muitos casos o custo desses testes desnecessários são tão altos que os programadores envolvidos já desistiram de testar completamente. Não é que eles não têm testes. Eles têm uma grande, mas obsoleta suíte de testes, que nunca roda. Um jeito simples de obter melhores utilidades dos testes é escrever menos deles. O jeito mais seguro de conseguir isso é testar tudo apenas uma vez e no lugar certo. 
+
+Remover duplicação de testes diminui o custo da mudança de testes quando há mudanças na aplicação, e colocar testes nos lugares certos garantem que eles serão forçados a mudar apenas quando absolutamente necessário. Refinar seus testes para apenas o essencial requer ter uma ideia muito clara sobre o que você pretende testar, uma que pode ser derivada de princípios de \textit{design} que você já conhece.
+
+Pense em uma aplicação orientada a objetos como uma série de mensagens passando entre um conjunto de caixas pretas. Lidar com cada objeto como se fosse uma caixa preta restringe o que outros tem permissão para saber e limita o conhecimento público sobre qualquer mensagens que atravessam suas fronteiras.
+
+Objetos com bom \textit{design} têm fronteiras que são fortes. Cada um é como a cápsula espacial exibida na Figura \ref{img:origem_mensagens}. Nada no exterior pode ver dentro, nada dentro pode ver o exterior e apenas algumas mensagens explicitamente acordadas podem passar pelas fechaduras.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.40]{imagens/origem_mensagens.png}
+  \caption{Objetos em teste são como cápsulas espaciais, mensagens abrem suas brechas}
+  \label{img:origem_mensagens}
+\end{figure}
+
+Essa ignorância da parte interna de todos os outros objetos é a parte central do \textit{design}. Lidar com objetos como se eles fossem apenas e exatamente as mensagens as quais eles respondem permite que você faça o \textit{design} de uma aplicação que é alterável, e é o seu entendimento sobre a importância dessa perspectiva que vai permitir que você crie testes que fornecem o máximo de benefício com o mínimo de custo.
+
+Os princípios de \textit{design} que você está impondo a sua aplicação também se aplicam aos seus testes. Cada teste é meramente outro objeto da aplicação que precisa usar uma classe existente. Quanto mais o teste fica acoplado aquela classe, mais emaranhado os dois se tornam e mais vulnerável o teste se torna a ser forçado a mudar desnecessariamente.
+
+Não apenas você deveria limitar o acoplamento, mas os poucos que você permite deveriam ser a coisas estáveis. A coisa mais estável sobre qualquer objeto é a sua interface pública; segue-se logicamente que os testes que você escreve devem ser para mensagens que são definidas nas interfaces públicas. Os testes mais custosos e inúteis são aqueles que abrem um buraco nas paredes de contenção de um objeto ao se acoplarem em detalhes internos instáveis 
 
