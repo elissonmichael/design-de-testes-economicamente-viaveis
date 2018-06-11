@@ -91,5 +91,23 @@ Essa ignorância da parte interna de todos os outros objetos é a parte central 
 
 Os princípios de \textit{design} que você está impondo a sua aplicação também se aplicam aos seus testes. Cada teste é meramente outro objeto da aplicação que precisa usar uma classe existente. Quanto mais o teste fica acoplado aquela classe, mais emaranhado os dois se tornam e mais vulnerável o teste se torna a ser forçado a mudar desnecessariamente.
 
-Não apenas você deveria limitar o acoplamento, mas os poucos que você permite deveriam ser a coisas estáveis. A coisa mais estável sobre qualquer objeto é a sua interface pública; segue-se logicamente que os testes que você escreve devem ser para mensagens que são definidas nas interfaces públicas. Os testes mais custosos e inúteis são aqueles que abrem um buraco nas paredes de contenção de um objeto ao se acoplarem em detalhes internos instáveis 
+Não apenas você deveria limitar o acoplamento, mas os poucos que você permite deveriam ser a coisas estáveis. A coisa mais estável sobre qualquer objeto é a sua interface pública; segue-se logicamente que os testes que você escreve devem ser para mensagens que são definidas nas interfaces públicas. Os testes mais custosos e inúteis são aqueles que abrem um buraco nas paredes de contenção de um objeto ao se acoplarem a detalhes internos instáveis. Esses testes ansiosos provam nada sobre exatidão no geral de uma aplicação, mas no entanto aumentam custos porque eles quebram a cada refatoração da classe por baixo.
 
+Testes deveriam se concentrar nas mensagens de entrada e saída que cruzam as fronteiras do objeto. As mensagens de entrada compõem a interface pública do objeto que recebe. As mensagens de saída, por definição, são entradas para outros objetos e então são parte da interface de algum outro objeto, como ilustrado na Figura \ref{img:depedencia}.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.40]{imagens/dependencia.png}
+  \caption{Uma mensagem de saída de um objeto é a mensagem de entrada de outro objeto}
+  \label{img:dependencia}
+\end{figure}
+
+Na Figura \ref{img:depedencia}, mensagens que são entrada em Foo compõem a interface pública de Foo. Foo é responsável por testar sua própria interface e faz isso ao fazer afirmações sobre os resultados que essas mensagens retornam. Testes que fazem afirmações sobre os valores que as mensagens retornam são testes de \textit{estado}. Testes assim comumente afirmam que os resultados retornados por uma mensagem são iguais a um valor esperado.
+
+A Figura \ref{img:depedencia} também mostra Foo enviando mensagens para Bar. Uma mensagem enviada de Foo para Bar é uma mensagem de saída para Foo, mas uma mensagem de entrada para Bar. Essa mensagem é parte da interface pública de Bar e portanto todos os testes de estado devem então estarem confinados em Bar. Foo não precisa, nem deve, testar o estado dessas mensagens de saída. A regra geral é que objetos devem fazer afirmações sobre o estado apenas das mensagens de suas próprias interfaces públicas. Seguir essa regra limita os testes de retorno de valores de mensagens a apenas um lugar e remove duplicações desnecessárias, fazendo com que seus testes fiquem DRY (\textit{Don't Repeat Yourself}) e reduzindo custos de manutenção.
+
+O fato de você não precisar testar o estado de mensagens de saída não significa que mensagens de saída não precisam de teste algum. Existem dois sabores de mensagens de saída, e um deles requer um tipo diferente de teste.
+
+Algumas mensagens de saída não têm efeito colateral e portanto importam apenas para quem as envia. Quem envia a mensagem com certeza se importa com o resultado que obtém como retorno (por que outro motivo enviar uma mensagem?), mas nenhuma outra parte da aplicação se importa se a mensagem é enviada. Mensagens de saída como essa são conhecidas como \textit{queries} (consultas) e elas não precisam ser testadas pelo objeto que envia a mensagem. Mensagens de consulta são parte da interface pública do objeto que as recebe, o qual já implementa todos os testes de estado necessários.
+
+Contudo, muitas mensagens de saída têm efeitos colaterais (um arquivo é escrito, um registro no banco de dados é salvado, uma ação é tomada por um observador) sobre os quais sua aplicação depende.
