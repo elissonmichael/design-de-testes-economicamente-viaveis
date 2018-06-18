@@ -142,3 +142,19 @@ Essa licença para usar o seu próprio julgamento não é uma permissão para pu
 
 Qualquer um pode criar um novo \textit{framework} de testes em Ruby e algumas vezes parece que todo mundo já criou. O brilhante \textit{framework} novo pode conter uma \textit{feature} que você simplesmente não pode viver sem; se você entende os custos e benefícios, sinta-se livre para escolher qualquer \textit{framework} que sirva para você.
 
+No entanto, há muitas boas razões para ficar dentro das convenções ao testar. Os \textit{frameworks} mais utilizados têm o melhor suporte. Eles são atualizados rapidamente para garantir compatibilidade com as novas versões de Ruby (e Rails) e portanto não apresentam obstáculos para se manterem atuais. Suas grandes base de usuários influenciam eles para manterem compatibilidade com versões anteriores; é improvável que eles irão mudar de uma maneira que vai forçar você a reescrever todos os seus testes. E por causa que eles são amplamente adotados, é fácil encontrar programadores que tenham experiência com eles.
+
+A partir dessa escrita, os \textit{frameworks} convencionais são MiniTest, de Ryan Davis e seattle.rb e empacotado com Ruby em sua versão 1.9, e RSpec, de David Chelimsky e a equipe do RSpec. Esses \textit{frameworks} têm filosofias diferentes e enquanto você pode naturalmente tender a um ou o outro, ambos são escolhas excelentes.
+
+Não apenas você precisa escolher um framework, você precisa lidar com estilos alternativos de testes:   Desenvolvimento Orientado a Testes (TDD - \textit{Test Driven Development}) e Desenvolvimento Orientado por Comportamento (BDD - \textit{Behavior Driven Development}). Aqui a decisão não é muito clara. TDD e BDD podem parecer estarem em oposição, mas eles são melhores visualizados como uma sequência contínua na qual os elementos adjacentes parecem ser iguais, mas os extremos são bem diferentes, ilustrado na Figura \ref{img:bdd_e_tdd}, onde seus valores e experiência ditam a escolha de onde ficar.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.40]{imagens/bdd_e_tdd.png}
+  \caption{BDD e TDD deveriam ser visualizados como uma sequência contínua.}
+  \label{img:bdd_e_tdd}
+\end{figure}
+
+Ambos os estilos criam código escrevendo testes primeiro. BDD tem uma abordagem de fora para dentro, criando objetos nos limites de uma aplicação e trabalhando em direção ao interior, usando \textit{mocks} quando necessário para fornecer objetos ainda não escritos. TDD tem uma abordagem de dentro para fora, geralmente começando com testes de objetos de domínio e então reutilizando esses recém criados objetos de domínio nos testes das camadas adjacentes.
+
+Quando testando, é útil pensar nos objetos das sua aplicação como divididos em duas grandes categorias. A primeira categoria contém o objeto que você está testando, referido a partir de agora como o objeto sendo testado. A segunda categoria contém todo o resto.
