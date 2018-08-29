@@ -158,3 +158,17 @@ Não apenas você precisa escolher um framework, você precisa lidar com estilos
 Ambos os estilos criam código escrevendo testes primeiro. BDD tem uma abordagem de fora para dentro, criando objetos nos limites de uma aplicação e trabalhando em direção ao interior, usando \textit{mocks} quando necessário para fornecer objetos ainda não escritos. TDD tem uma abordagem de dentro para fora, geralmente começando com testes de objetos de domínio e então reutilizando esses recém criados objetos de domínio nos testes das camadas adjacentes.
 
 Quando testando, é útil pensar nos objetos das sua aplicação como divididos em duas grandes categorias. A primeira categoria contém o objeto que você está testando, referido a partir de agora como o objeto sendo testado. A segunda categoria contém todo o resto.
+
+Seu teste certamente deve saber sobre a primeira categoria, ou seja, do objeto sendo testado, mas ele deve permanecer o mais ignorante possível sobre a segunda categoria. Finja que o resto da aplicação é uma escuridão, que a única informação disponível durante o teste é aquela visível ao olhar para o objeto sendo testado.
+
+Uma vez que você tenha reduzido o foco do seu teste para o objeto em específico, você precisará escolher um ponto de vista de teste. Seu teste 'poderia' ficar completamente dentro do objeto sendo testado, com acesso a toda a sua estrutura interna. Porém, isso é uma má ideia, porque permite que conhecimento que era para ser privado ao objeto vaze para fora nos testes, aumentando o acoplamento entre eles e ampliando a probabilidade de que uma mudança no código irá requerer uma mudança nos testes. É melhor para os testes assumirem um ponto de vista que mire ao redor dos limites do objeto sendo testado, onde eles podem saber apenas das mensagens que entram e saem.
+
+\subsection{O \textit{Framework MiniTest}}
+
+Os testes nesse capítulo são escritos usando MiniTest. Isso não é uma defesa ou aprovação de um \textit{framework} em relação a outro, mas em vez disso um reconhecimento do fato que os exemplos escritos em \textit{MiniTest} serão executados em qualquer lugar com Ruby 1.9 (ou mais recente) instalado. Você pode transcrever e experimentar com esses exemplos sem precisar instalar software adicional.
+
+Talvez o \textit{MiniTest} tenha mudado quando você ler esse capítulo. Completos estranhos podem ter melhorado esse software e você ter obtido essas melhorias de graça; tal é a vida de um desenvolvedor de código aberto. Independentemente de como \textit{MiniTest} tenha evoluído, os princípios aqui ilustrados se mantém verdadeiros. Não se distraia com mudanças na sintaxe; concentre-se em entender os objetivos fundamentais dos testes. Uma vez que você tenha compreendido esses objetivos, você pode alcança-los com qualquer \textit{framework} de testes. 
+
+\section{Testando Mensagens de Entrada}
+
+Mensagens de entrada formam a interface pública de um objeto, a face que ele mostra para o mundo. Essa mensagens precisam de testes porque outros objetos da aplicação dependem da assinatura delas e dos resultados que elas retornam.
