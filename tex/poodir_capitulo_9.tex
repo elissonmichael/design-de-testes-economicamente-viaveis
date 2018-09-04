@@ -172,3 +172,14 @@ Talvez o \textit{MiniTest} tenha mudado quando você ler esse capítulo. Complet
 \section{Testando Mensagens de Entrada}
 
 Mensagens de entrada formam a interface pública de um objeto, a face que ele mostra para o mundo. Essa mensagens precisam de testes porque outros objetos da aplicação dependem da assinatura delas e dos resultados que elas retornam.
+
+Esses primeiros testes usam código de exemplos do Capítulo 3, Lidando com Dependências. A seguir é apresentado o código para te lembrar das classes Roda e Engrenagem, uma vez que elas estão juntas. Engrenagem cria uma instância da classe Roda dentro do método polegadas, na linha 24 abaixo.
+
+\subsection{Observação}
+O restante desse capítulo contém testes para código que apareceu anteriormente nesse livro. Essas amostras de código serviram mais cedo para explicar os princípios de \textit{design} orientado a objetos; aqui eles irão ilustrar como testar diferentes componentes de \textit{design}. Os próximos testes não cobrem todas as linhas de código que você viu, mas eles testam todos os conceitos que você aprendeu nesse livro.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.40]{imagens/codigo_pag_201.png}
+  \label{img:codigo_pag_201}
+\end{figure}
