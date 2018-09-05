@@ -183,3 +183,28 @@ O restante desse capítulo contém testes para código que apareceu anteriorment
   \includegraphics[scale=0.40]{imagens/codigo_pag_201.png}
   \label{img:codigo_pag_201}
 \end{figure}
+
+A tabela \ref{table:mensagens} mostra as mensagens (outras além daquelas que retornam simples atributos) que cruzam os limites desses objetos. Roda responde a uma mensagem de entrada, diametro (que por sua vez é enviada por, é uma mensagem de saída de Engrenagem) e Engrenagem responde duas mensagens de entrada, polegadas e relação.
+O parágrafo de abertura dessa seção dizia que toda mensagem de entrada é parte da interface pública de um objeto e portanto deve ser testada. Agora é a hora de adicionar uma pequena ressalva nessa regra. 
+
+\subsection{Apagando Interfaces Inutilizadas}
+
+Mensagens de entrada devem ter dependentes. Como você pode ver na tabela \ref{table:mensagens}, isso é verdade para diametro, polegadas e relação onde elas são mensagens de entrada. Algum objeto além do implementador depende de cada uma dessas mensagens.
+Se você desenhar essa tabela para o objeto sendo testado e encontrar uma mensagem de entrada que parece não ter dependente(s), você deve ver essa mensagem com muita suspeita. Qual é o propósito de implementar uma mensagem que ninguém envia? Ela não está chegando de forma alguma, é uma implementação especulativa que cheira a adivinhação sobre o futuro e claramente antecipa requerimentos que não existem.
+
+Não teste mensagens de entrada que não tem dependentes, apague elas. Sua aplicação é melhorada impiedosamente ao eliminar código que não é usado. Tal código é fluxo de caixa negativo, ele adiciona o peso de testes e manutenção mas não provê valor algum. Excluir código não usado economiza dinheiro agora, se você não o apagar, você precisa testa-lo.
+
+\begin{table}[!htbp]
+  \caption{Mensagens de Entrada e Saída por Objeto}
+  \label{table:mensagens}
+  \centering
+  \begin{tabular}{p{3.0cm} | p{3.0cm} | p{3.0cm} | p{3.0cm}}
+    \toprule
+    \textbf{Objeto} & \textbf{Entrada} & \textbf{Saída} & \textbf{Dependentes?} \\ \midrule
+    \small{Roda} & \small{diametro} & \small{} & \small{Sim} \\ \midrule
+   \small{Engrenagem} & \small{} & \small{diametro} & \small{Não} \\ \midrule
+   \small{} & \small{polegadas} & \small{} & \small{Sim} \\ \midrule
+    \small{} & \small{relacao} & \small{} & \small{Sim}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
