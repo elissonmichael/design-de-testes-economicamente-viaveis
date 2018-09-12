@@ -12,7 +12,7 @@ Repare na parte \textit{não altere o comportamento externo do código}. Refator
 
 Bom \textit{design} preserva flexibilidade máxima no menor custo ao adiar decisões a cada oportunidade. Postergando qualquer comprometimento até que requerimentos mais específicos cheguem. Quando esse dia chegar, será através da refatoração que você vai transformar a estrutura atual do código em uma que acomodará os novos requerimentos. Novas \textit{features} serão adicionadas apenas depois que tiver refatorado o código com sucesso.
 
-Se as suas habilidades de refatorar são fracas, melhore-as. A necessidade de refactoring contínuo é uma consequência natural do bom \textit{design}; seus esforços para melhorar o \textit{design} irão dar seu maior retorno apenas quando você refatorar com facilidade.
+Se as suas habilidades de refatorar são fracas, melhore-as. A necessidade de  \textit{refactoring} contínuo é uma consequência natural do bom \textit{design}; seus esforços para melhorar o \textit{design} irão dar seu maior retorno apenas quando você refatorar com facilidade.
 
 Para finalizar, a arte de escrever código mutável requer a habilidade de escrever testes que tenham valor. Testes te dão confiança para refatorar constantemente. Testes eficientes provam que o código alterado continua se comportando corretamente sem aumentar os custos no geral. Bons testes são escritos de uma forma que a alteração do código não force a reescrita dos testes, permitindo que refatorações possam ser realizadas sem medo e insegurança.
 
@@ -20,7 +20,7 @@ A escrita de testes que executem este truque é um questão de \textit{design} e
 
 Uma compreensão de \textit{design} orientado a objetos, boas habilidades de refatoração e a habilidade de escrever testes eficientes formam a base principal onde reside o código de alteração fácil.
 
-Código com bom \textit{design} é fácil de alterar, \textit{refactoring} é como você muda de um \textit{design} para o próximo e testes te libertam para refatorar de forma impune. 
+Código com bom \textit{design} é fácil de alterar, \textit{refactoring} é como você muda de um \textit{design} para o próximo e testes te libertam para refatorar de forma impune.
 
 \section{Testando Intencionalmente}
 
@@ -44,7 +44,7 @@ Saber que você pode (ou não pode) fazer algo mais cedo talvez façam você esc
 
 \subsection{Fornecimento de Documentação}
 
-Testes providenciam a única documentação confiável de \textit{design}. A história que eles contam permanecem verdadeiras muito tempo depois que a documentos em papel se tornam obsoletos e a memória humana falha. Escreva seus testes como se você esperasse que o seu futuro eu tenha amnésia. Lembre-se que você vai esquecer; escreva testes que te lembrem da história que uma vez você viveu. 
+Testes providenciam a única documentação confiável de \textit{design}. A história que eles contam permanecem verdadeiras muito tempo depois que a documentos em papel se tornam obsoletos e a memória humana falha. Escreva seus testes como se você esperasse que o seu futuro eu tenha amnésia. Lembre-se que você vai esquecer; escreva testes que te lembrem da história que uma vez você viveu.
 
 \subsection{Adiando Decisões de \textit{Design}}
 
@@ -52,7 +52,7 @@ Testes permitem que você adie de forma segura decisões de \textit{design}. Con
 
 Esses pontos de decisão ''pendente'' são frequentemente codificados como \textit{hacks} concretos levemente embaraçosos escondidos atrás de interfaces totalmente apresentáveis. Essa situação ocorre quando você está ciente de um caso concreto no presente, mas você espera totalmente que novos casos chegarão em um futuro próximo. Você sabe que em algum ponto você vai estar melhor servido por código que controla melhor esses muitos casos concretos em uma única abstração, mas exatamente agora você não tem informação suficiente para antecipar qual será essa abstração.
 
-Quando seus testes dependem de interfaces você pode refatorar o código por baixo com total desapego. Os testes verificam a continuação do bom comportamento da interface e mudanças no código subjacente não forçam a reescrita dos testes. Depender intencionalmente em interfaces permite que você use testes para postergar decisões de \textit{design} com segurança e sem penalidade alguma.  
+Quando seus testes dependem de interfaces você pode refatorar o código por baixo com total desapego. Os testes verificam a continuação do bom comportamento da interface e mudanças no código subjacente não forçam a reescrita dos testes. Depender intencionalmente em interfaces permite que você use testes para postergar decisões de \textit{design} com segurança e sem penalidade alguma.
 
 \subsection{Suporte para Abstrações}
 
@@ -64,7 +64,7 @@ Conforme a base de código cresce e o número de abstrações aumenta, testes se
 
 \subsection{Expondo Falhas de \textit{Design}}
 
-O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outro objetos irão achar difícil reutilizar o código. 
+O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outro objetos irão achar difícil reutilizar o código.
 
 Quando o \textit{design} é ruim, testar é difícil. No entanto, não é garantido que o inverso seja verdade. Testes custosos não necessariamente significam que a aplicação tem \textit{design} pobre. É tecnicamente possível escrever testes ruins para código com bom \textit{design}. Assim sendo, para testes diminuírem seus custos, tanto a aplicação subjacente e os testes precisam ter bom \textit{design}.
 
@@ -72,7 +72,7 @@ Seu objetivo é ganhar todos os benefícios dos testes pelo menor custo possíve
 
 \section{Sabendo o que Testar}
 
-A maioria dos programadores escrevem testes demais. Isso não é sempre óbvio porque em muitos casos o custo desses testes desnecessários são tão altos que os programadores envolvidos já desistiram de testar completamente. Não é que eles não têm testes. Eles têm uma grande, mas obsoleta suíte de testes, que nunca roda. Um jeito simples de obter melhores utilidades dos testes é escrever menos deles. O jeito mais seguro de conseguir isso é testar tudo apenas uma vez e no lugar certo. 
+A maioria dos programadores escrevem testes demais. Isso não é sempre óbvio porque em muitos casos o custo desses testes desnecessários são tão altos que os programadores envolvidos já desistiram de testar completamente. Não é que eles não têm testes. Eles têm uma grande, mas obsoleta suíte de testes, que nunca roda. Um jeito simples de obter melhores utilidades dos testes é escrever menos deles. O jeito mais seguro de conseguir isso é testar tudo apenas uma vez e no lugar certo.
 
 Remover duplicação de testes diminui o custo da mudança de testes quando há mudanças na aplicação, e colocar testes nos lugares certos garantem que eles serão forçados a mudar apenas quando absolutamente necessário. Refinar seus testes para apenas o essencial requer ter uma ideia muito clara sobre o que você pretende testar, uma que pode ser derivada de princípios de \textit{design} que você já conhece.
 
@@ -146,7 +146,7 @@ No entanto, há muitas boas razões para ficar dentro das convenções ao testar
 
 A partir dessa escrita, os \textit{frameworks} convencionais são MiniTest, de Ryan Davis e seattle.rb e empacotado com Ruby em sua versão 1.9, e RSpec, de David Chelimsky e a equipe do RSpec. Esses \textit{frameworks} têm filosofias diferentes e enquanto você pode naturalmente tender a um ou o outro, ambos são escolhas excelentes.
 
-Não apenas você precisa escolher um framework, você precisa lidar com estilos alternativos de testes:   Desenvolvimento Orientado a Testes (TDD - \textit{Test Driven Development}) e Desenvolvimento Orientado por Comportamento (BDD - \textit{Behavior Driven Development}). Aqui a decisão não é muito clara. TDD e BDD podem parecer estarem em oposição, mas eles são melhores visualizados como uma sequência contínua na qual os elementos adjacentes parecem ser iguais, mas os extremos são bem diferentes, ilustrado na Figura \ref{img:bdd_e_tdd}, onde seus valores e experiência ditam a escolha de onde ficar.
+Não apenas você precisa escolher um  \textit{framework}, você precisa lidar com estilos alternativos de testes: Desenvolvimento Orientado a Testes (TDD - \textit{Test Driven Development}) e Desenvolvimento Orientado por Comportamento (BDD - \textit{Behavior Driven Development}). Aqui a decisão não é muito clara. TDD e BDD podem parecer estarem em oposição, mas eles são melhores visualizados como uma sequência contínua na qual os elementos adjacentes parecem ser iguais, mas os extremos são bem diferentes, ilustrado na Figura \ref{img:bdd_e_tdd}, onde seus valores e experiência ditam a escolha de onde ficar.
 
 \begin{figure}[!htbp]
   \center
@@ -167,25 +167,26 @@ Uma vez que você tenha reduzido o foco do seu teste para o objeto em específic
 
 Os testes nesse capítulo são escritos usando MiniTest. Isso não é uma defesa ou aprovação de um \textit{framework} em relação a outro, mas em vez disso um reconhecimento do fato que os exemplos escritos em \textit{MiniTest} serão executados em qualquer lugar com Ruby 1.9 (ou mais recente) instalado. Você pode transcrever e experimentar com esses exemplos sem precisar instalar software adicional.
 
-Talvez o \textit{MiniTest} tenha mudado quando você ler esse capítulo. Completos estranhos podem ter melhorado esse software e você ter obtido essas melhorias de graça; tal é a vida de um desenvolvedor de código aberto. Independentemente de como \textit{MiniTest} tenha evoluído, os princípios aqui ilustrados se mantém verdadeiros. Não se distraia com mudanças na sintaxe; concentre-se em entender os objetivos fundamentais dos testes. Uma vez que você tenha compreendido esses objetivos, você pode alcança-los com qualquer \textit{framework} de testes. 
+Talvez o \textit{MiniTest} tenha mudado quando você ler esse capítulo. Completos estranhos podem ter melhorado esse software e você ter obtido essas melhorias de graça; tal é a vida de um desenvolvedor de código aberto. Independentemente de como \textit{MiniTest} tenha evoluído, os princípios aqui ilustrados se mantém verdadeiros. Não se distraia com mudanças na sintaxe; concentre-se em entender os objetivos fundamentais dos testes. Uma vez que você tenha compreendido esses objetivos, você pode alcança-los com qualquer \textit{framework} de testes.
 
 \section{Testando Mensagens de Entrada}
 
 Mensagens de entrada formam a interface pública de um objeto, a face que ele mostra para o mundo. Essa mensagens precisam de testes porque outros objetos da aplicação dependem da assinatura delas e dos resultados que elas retornam.
 
-Esses primeiros testes usam código de exemplos do Capítulo 3, Lidando com Dependências. A seguir é apresentado o código para te lembrar das classes Roda e Engrenagem, uma vez que elas estão juntas. Engrenagem cria uma instância da classe Roda dentro do método polegadas, na linha 24 abaixo.
-
+Esses primeiros testes usam código de exemplos do Capítulo 3, Lidando com Dependências. Na Figura \ref{img:codigo_pag_201} é exibido o código para te lembrar das classes Roda e Engrenagem, uma vez que elas estão juntas. Engrenagem cria uma instância da classe Roda dentro do método polegadas, na linha 24 abaixo.
+\ref{img:bdd_e_tdd}
 \subsection{Observação}
 O restante desse capítulo contém testes para código que apareceu anteriormente nesse livro. Essas amostras de código serviram mais cedo para explicar os princípios de \textit{design} orientado a objetos; aqui eles irão ilustrar como testar diferentes componentes de \textit{design}. Os próximos testes não cobrem todas as linhas de código que você viu, mas eles testam todos os conceitos que você aprendeu nesse livro.
 
 \begin{figure}[!htbp]
   \center
-  \includegraphics[scale=0.40]{imagens/codigo_pag_201.png}
+  \includegraphics[scale=0.50]{imagens/codigo_pag_201.png}
+  \caption{Código das Classes Roda e Engrenagem}
   \label{img:codigo_pag_201}
 \end{figure}
 
 A tabela \ref{table:mensagens} mostra as mensagens (outras além daquelas que retornam simples atributos) que cruzam os limites desses objetos. Roda responde a uma mensagem de entrada, diametro (que por sua vez é enviada por, é uma mensagem de saída de Engrenagem) e Engrenagem responde duas mensagens de entrada, polegadas e relação.
-O parágrafo de abertura dessa seção dizia que toda mensagem de entrada é parte da interface pública de um objeto e portanto deve ser testada. Agora é a hora de adicionar uma pequena ressalva nessa regra. 
+O parágrafo de abertura dessa seção dizia que toda mensagem de entrada é parte da interface pública de um objeto e portanto deve ser testada. Agora é a hora de adicionar uma pequena ressalva nessa regra.
 
 \subsection{Apagando Interfaces Inutilizadas}
 
@@ -202,9 +203,49 @@ Não teste mensagens de entrada que não tem dependentes, apague elas. Sua aplic
     \toprule
     \textbf{Objeto} & \textbf{Entrada} & \textbf{Saída} & \textbf{Dependentes?} \\ \midrule
     \small{Roda} & \small{diametro} & \small{} & \small{Sim} \\ \midrule
-   \small{Engrenagem} & \small{} & \small{diametro} & \small{Não} \\ \midrule
-   \small{} & \small{polegadas} & \small{} & \small{Sim} \\ \midrule
+    \small{Engrenagem} & \small{} & \small{diametro} & \small{Não} \\ \midrule
+    \small{} & \small{polegadas} & \small{} & \small{Sim} \\ \midrule
     \small{} & \small{relacao} & \small{} & \small{Sim}\\
     \bottomrule
   \end{tabular}
 \end{table}
+
+Supere qualquer dificuldade que você tenha; praticar essa eliminação vai te
+mostrar o valor que tem. Até que chegue o momento em que você esteja completamente
+convencido da exatidão nessa estratégia, você pode ser consolar com o conhecimento
+de que em uma situação extrema você pode recuperar código excluído a partir do
+controle de versão. Independentemente se você faz isso com prazer ou dor, apague
+o código. Código inutilizado custa mais para se manter do que para se recuperar.
+
+\subsection{Comprovando a Interface Pública}
+
+Mensagens de entrada são testadas ao se fazer afirmações (\textit{asserts})
+sobre os valores, ou estados, que suas chamadas retornam. O primeiro
+requerimento para testar uma mensagem de entrada é provar que ela retorna
+o valor correto para todas as situações possíveis. O código da Figura \ref{img:codigo_pag_203}
+mostra um teste do método diametro da classe Roda. A linha 4 cria uma
+instância de Roda e a linha 5 afirma que o diametro dessa Roda é 29.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_203.png}
+  \label{img:codigo_pag_203}
+\end{figure}
+
+Esse é um teste extremamente simples e usa muito pouco código. Roda não tem
+dependência alguma escondida, então nenhum outro objeto em sua aplicação é
+criado como efeito colateral ao se executar esse teste. O \textit{design}
+de Roda permite que você teste ela independente de todas as outras classes
+em sua aplicação.
+
+Testar Engrenagem é um pouco mais interessante. Engrenagem requer mais
+alguns argumentos do que Roda, mas mesmo assim a estrutura geral desses dois
+testes são muito parecidas. No teste do método polegadas na Figura \ref{img:codigo_pag_204},
+a linha 4 cria uma instância de Engrenagem e a linha 10 faz afirmações sobre
+os resultados do método.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_204.png}
+  \label{img:codigo_pag_204}
+\end{figure}
