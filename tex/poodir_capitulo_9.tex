@@ -249,3 +249,39 @@ os resultados do método.
   \includegraphics[scale=0.50]{imagens/codigo_pag_204.png}
   \label{img:codigo_pag_204}
 \end{figure}
+
+Esse teste de polegadas parece muito com o teste de diametro em Roda, mas não
+se engane pelas aparências. Esse teste tem um emaranhamento que o teste de
+diametro não tinha. A implementação do método polegadas em Engrenagem cria e
+usa outro objeto incondicionalmente, Roda. Engrenagem e Roda estão acoplados em
+código e nos testes, ainda que não esteja óbvio aqui.
+
+O fato do método polegadas em Engrenagem criar e usar outro objeto afeta quanto
+tempo esse teste roda e qual a probabilidade dele sofrer consequências
+não intencionadas como resultado de mudanças em partes não relacionadas da
+aplicação. O acoplamento é o que cria esse problema, porém, está escondido
+dentro de Engrenagem e por isso totalmente invisível para esse teste. O propósito
+do teste é provar que polegadas retorna o resultado correto e ele certamente cumpre
+esse requerimento, mas a maneira como o código por baixo está estruturado adiciona
+riscos ocultos.
+
+Se objetos da classe Roda forem custosos para serem criados, o teste em
+Engrenagem paga esse preço mesmo que ele não tenha interesse em Roda. Se
+Engrenagem está correto, mas Roda está quebrada, o teste em Engrenagem pode
+falhar de uma forma enganosa, em um lugar muito distante do código que você
+está tentando testar.
+
+Testes rodam o mais rápido possível quando eles executam apenas o mínimo de
+código. O volume de código externo que o teste invoca está diretamente
+relacionado com o seu \textit{design}. Uma aplicação construída com objetos
+fortemente acoplados e carregados de dependências são como um tapete onde puxar
+um dos fios arrasta o tapete inteiro. Quando objetos fortemente acoplados são
+testados, o teste de um objeto roda código de muitos outros. Se o código estivesse
+organizado de forma que Roda também estivesse acoplado a outros objetos, esse
+problema seria ampliado. Executar o teste em Engrenagem iria então criar uma
+grande rede de objetos, onde qualquer um deles poderia quebrar o teste de uma
+forma enlouquecedoramente confusa.
+
+Esses problemas são manifestados em testes, mas não são acontecem apenas neles.
+Devido aos testes serem a primeira reutilização de código, esse problema é apenas um
+precursor das coisas que virão para a sua aplicação como um todo.
