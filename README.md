@@ -14,4 +14,4 @@ As dependências são baseadas na distribuição Linux Ubuntu.
 Para compilar, depois ter instalado as dependências, basta rodar o comando `make pdf`.
 
 
-Antes de efetuar um commit rote o comando `make clean` para remover arquivos temporários (e o pdf).
+Antes de efetuar um commit rode o comando `make clean` para remover arquivos temporários (e o pdf).

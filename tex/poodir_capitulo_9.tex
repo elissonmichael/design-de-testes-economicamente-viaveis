@@ -285,3 +285,38 @@ forma enlouquecedoramente confusa.
 Esses problemas são manifestados em testes, mas não são acontecem apenas neles.
 Devido aos testes serem a primeira reutilização de código, esse problema é apenas um
 precursor das coisas que virão para a sua aplicação como um todo.
+
+\section{Isolando o Objeto Sendo Testando}
+
+Engrenagem é um objeto simples, mas tentativas de testar seu método polegadas já
+nos fez descobrir sua complexidade oculta. O objetivo desse teste é certificar
+que as polegadas de uma engrenagem sejam calculadas corretamente, mas acontece
+que executar o método polegadas depende de código em objetos além de Engrenagem.
+
+Isso expõe um problema de \textit{design} mais amplo. Quando você não consegue
+testar Engrenagem de forma isolada, isso é um mau presságio para o futuro. Essa
+dificuldade para isolar Engrenagem nos testes revela que essa classe está
+limitada a um contexto específico, um que impõe limitações que irão
+interferir com reúso.
+
+O capítulo 3 removeu essa dependência ao remover a criação de Roda em
+Engrenagem. A Figura \ref{img:codigo_pag_205} exibe uma cópia do código que foi
+responsável por essa transição. Engrenagem agora espera ser injetado com um
+objeto que entende a mensagem diametro.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_205.png}
+  \label{img:codigo_pag_205}
+\end{figure}
+
+Essa mudança em código está relacionada a mudança de raciocínio.
+Engrenagem não se importa mais com a classe do objeto injetado, ela simplesmente
+espera que o objeto implemente diametro. O método diametro é parte da interface
+pública de um papel (\textit{role}, em inglês), um que poderia ser chamado
+razoavelmente de 'Diameterizável'.
+
+Agora que Engrenagem está desacoplada de Roda, você deve injetar uma instância
+de um Diameterizável durante a criação de toda Engrenagem. Entretanto, como
+Roda é a única classe na aplicação que desempenha esse papel, suas opções em
+tempo de execução estão seriamente limitadas.
