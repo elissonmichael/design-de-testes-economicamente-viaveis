@@ -12,12 +12,12 @@ class Roda
 end
 
 class Engrenagem
-  attr_reader :roda_dentada, :marcha, :aro, :roda
+  attr_reader :roda_dentada, :marcha, :aro, :pneu
   def initialize(argumentos)
     @roda_dentada = argumentos[:roda_dentada]
     @marcha       = argumentos[:marcha]
     @aro          = argumentos[:aro]
-    @roda         = argumentos[:roda]
+    @pneu         = argumentos[:pneu]
   end
 
   def polegadas
