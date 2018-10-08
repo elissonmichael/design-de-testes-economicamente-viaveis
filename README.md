@@ -13,5 +13,8 @@ As dependências são baseadas na distribuição Linux Ubuntu.
 
 Para compilar, depois ter instalado as dependências, basta rodar o comando `make pdf`.
 
+Se encontrar o erro `LaTeX Error: File fncychap.sty not found.`, instale também.
+
+  sudo apt-get install latexmk texlive texlive-science texlive-formats-extra
 
 Antes de efetuar um commit rode o comando `make clean` para remover arquivos temporários (e o pdf).
