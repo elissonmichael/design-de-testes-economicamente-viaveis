@@ -319,4 +319,38 @@ razoavelmente de 'Diameterizável'.
 Agora que Engrenagem está desacoplada de Roda, você deve injetar uma instância
 de um Diameterizável durante a criação de toda Engrenagem. Entretanto, como
 Roda é a única classe na aplicação que desempenha esse papel, suas opções em
-tempo de execução estão seriamente limitadas.
+tempo de execução estão seriamente limitadas. Na vida real, da forma como o
+código está, cada Engrenagem que você criar será necessariamente injetada com uma
+instância de Roda.
+
+Apesar disso soar paradoxal, injetar uma Roda em Engrenagem não é o mesmo que
+injetar um um 'Diameterizável'. O código da aplicação parece exatamente o mesmo,
+admito, mas o significado lógico difere. A diferença não está nos caracteres
+que você digita, mas no seu raciocínio sobre o que eles significam. Libertar sua
+imaginação de um anexo em classes de objetos que virão abre possibilidades de
+\textit{design} e testes que de outra forma não estariam disponíveis. Pensar no
+objeto injetado como uma instância de seu papel fornece mais escolhas sobre
+que tipo de 'Diameterizável' injetar em Engrenagem durante seus testes.
+
+Uma possibilidade de 'Diameterizável' é, obviamente, Roda, porque ela claramente
+implementa a interface correta. O próximo exemplo faz essa escolha banal, ele
+atualiza o teste existente para acomodar as mudanças no código ao injetar uma
+instância de Roda (linha 6) durante o teste.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_206.png}
+  \label{img:codigo_pag_206}
+\end{figure}
+
+Usar uma Roda para o 'Diameterizável' injetado resulta em código
+de teste que espelha exatamente a aplicação. Agora é óbvio,
+tanto na aplicação quanto nos testes, que Engrenagem está usando
+Roda. Esse acoplamento invisível entre essas classes foi exposto
+publicamente.
+
+Esse teste é rápido o suficiente, mas essa velocidade adequada é
+inteiramente acidental. Não é como se o teste do cálculo de
+polegadas estivesse cuidadosamente isolado e portanto
+desacoplado de outro código, nem um pouco, é que apenas todo o
+código acoplado nesse teste é executado rapidamente também.
