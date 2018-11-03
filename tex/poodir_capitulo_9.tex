@@ -354,3 +354,35 @@ inteiramente acidental. Não é como se o teste do cálculo de
 polegadas estivesse cuidadosamente isolado e portanto
 desacoplado de outro código, nem um pouco, é que apenas todo o
 código acoplado nesse teste é executado rapidamente também.
+
+Observe que não é óbvio aqui (ou em qualquer outro lugar) que Roda está
+desempenhando a função de 'Diameterizável'. A função é virtual, tudo está na sua
+cabeça. Nada no código guia mantenedores futuros a pensar em Roda como um
+'Diameterizável'. Contudo, apesar da invisibilidade da função e esse
+acomplamento a Roda, estruturar o teste dessa forma tem uma vantagem muito real,
+conforme exibido na próxima sessão.
+
+\section{Injetando Dependências Usando Classes}
+
+Quando o código em seu teste usa os mesmos objetos colaboradores que o código em
+sua aplicação, seus testes sempre quebram quando eles deveriam. O valor disso
+não pode ser subestimado.
+Aqui está um exemplo simples. Imagine que a interface pública dos
+'Diameterizáveis' mude. Outro programador vai até a classe de Roda e altera o
+nome do método diametro para largura, conforme ilustrado na linha 8 abaixo.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_207_a.png}
+  \label{img:codigo_pag_207_a}
+\end{figure}
+
+Imagine ainda que esse programador falhou em atualizar o nome da mensagem
+enviada por Engrenagem. Engrenagem ainda envia diametro em seu método polegadas,
+conforme você pode ver nesse lembrete do código atual de Engrenagem.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_207_b.png}
+  \label{img:codigo_pag_207_b}
+\end{figure}
