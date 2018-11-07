@@ -386,3 +386,44 @@ conforme você pode ver nesse lembrete do código atual de Engrenagem.
   \includegraphics[scale=0.50]{imagens/codigo_pag_207_b.png}
   \label{img:codigo_pag_207_b}
 \end{figure}
+
+
+Porque o teste de Engrenagem injeta uma instância de Roda e Roda implementa
+largura, mas Engrenagem envia diametro, o teste agora falha:
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_208_a.png}
+  \label{img:codigo_pag_208_a}
+\end{figure}
+
+Essa falha não é uma surpresa, é exatamente o que deveria acontecer quando dois
+objetos concretos colaboram e o destinatário da mensagem muda, mas o remetente
+não. Roda mudou e como resultado Engrenagem precisa mudar. Esse teste falha como
+deveria.
+O teste é simples e a falha óbvia porque o código é tão concreto, mas como tudo
+que é concreto ele só funciona para esse caso específico. Aqui, para esse
+código, o teste acima é bom o suficiente, mas existem outras situações onde você
+estaria melhor servido localizando e testando a abstração.
+Um exemplo mais extremo ilumina o problema. Se existirem centenas de
+'Diameterizáveis', como você decide qual revela melhor suas intenções durante os
+testes? E se os 'Diameterizáveis' forem extremamente custosos, como você
+evitaria executar um monte de código desnecessário e demorado? O senso comum
+sugere que se Roda é o único 'Diameterizável' e ele é rápido o suficiente, o
+teste deveria apenas injetar uma Roda, mas e se suas opções forem menos óbvias?
+
+\subsection{Injetando Dependências Como Papéis}
+
+A classe Roda e o papel 'Diameterizável' estão tão intimamente alinhadas que é
+difícil ver elas como conceitos separados, mas compreender o que aconteceu no
+teste anterior requer fazer a distinção. Engrenagem e Roda ambas têm relações
+com uma terceira coisa, o papel 'Diameterizável'. Como você pode ver na Figura
+\ref{img:codigo_pag_208_b} 'Diameterizável' é uma dependência de
+Engrenagem e é implementada por Roda.
+
+\begin{figure}[!htbp]
+  \center
+  \caption{Engrenagem depende de um 'Diameterizável'; Roda o implementa.}
+  \includegraphics[scale=0.50]{imagens/codigo_pag_208_b.png}
+  \label{img:codigo_pag_208_b}
+\end{figure}
