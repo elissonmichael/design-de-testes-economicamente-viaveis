@@ -427,3 +427,52 @@ Engrenagem e é implementada por Roda.
   \includegraphics[scale=0.50]{imagens/codigo_pag_208_b.png}
   \label{img:codigo_pag_208_b}
 \end{figure}
+
+Esse papel é uma abstração a partir da ideia de que diferentes objetos podem ter
+diâmetro. Como em todas as abstrações, é sensato esperar que esse papel abstrato
+seja mais estável do que o código concreto de onde ela veio. No entanto, para
+o caso específico acima, o oposto é verdade.
+
+Existem dois lugares no código onde um objeto depende do conhecimento de
+'Diameterizável'. Primeiro, Engrenagem acha que conhece a interface de
+'Diameterizável', isso significa que ela acredita que pode enviar diametro para
+o objeto injetado. Segundo, o código que criou o objeto para ser injetado
+acredita que Roda implementa essa interface, isso significa que ela espera que
+Roda implemente diametro. Agora que 'Diameterizável' mudou, existe um problema.
+Roda foi atualizada para implementar a nova interface, mas infelizmente
+Engrenagem ainda espera a interface antiga.
+
+O motivo todo de injenção de dependências é que isso permite que você
+substitua diferentes classes concretas sem ter que alterar código existente.
+Você pode juntar comportamento novo ao criar objetos que desempenham papéis
+existentes e injetar esses objetos onde esses papéis são esperados.
+\textit{Design} orientado a objetos diz para você injetar dependências porque
+acredita que classes específicas e concretas irão mudar mais do que esses
+papéis ou, de modo inverso, papéis serão mais estáveis do que as classes de
+onde foram abstraídos.
+
+Infelizmente, o opostos acabou de acontecer. Nesse exemplo não foi a classe
+do objeto injetado que mudou, foi a interface do papel. Ainda é correto injetar
+uma Roda, mas agora incorreto enviar para essa Roda a mensagem diametro.
+
+Quando um papel tem apenas um ator, esse único ator concreto e o papel abstrato
+são tão estreitamente alinhados que os limites entres eles ficam facilmente
+ofuscados e é um fato prático que algumas vezes esse ofuscamento não importa.
+Nesse caso Roda é o único ator de 'Diameterizável' e você não espera atualmente
+ter outros. Se Rodas são baratas, injetar uma Roda de verdade tem pouco efeito
+negativo em nossos testes.
+
+Quando o código da aplicação pode ser apenas escrito de um jeito, espelhar esse
+arranjo é frequentemente o jeito mais eficiente de escrever testes. Fazendo
+dessa forma permite que o  teste falhe corretamente independentemente de se
+a concretização (o nome da classe Roda) ou a abstração (a interface do método
+diametro) mudem.
+
+No entanto, isso não é sempre verdade. Algumas vezes existem forças que te levam
+a querer esquecer o uso de Roda em seus testes. Se sua aplicação contém muitos
+'Diameterizáveis' diferentes você talvez queira criar um idealizado de forma que
+seus testes claramente transmitam a ideia desse papel. Se todos os
+'Diameterizáveis' são caros, você talvez queira falsificar um barato para fazer
+seus testes serem executados mais rapidamente. Se você está fazendo BDD, sua
+aplicação pode ainda não conter nenhum objeto que desempenhe esse papel, você
+pode ser forçado a manufaturar algo apenas para escrever o teste.
