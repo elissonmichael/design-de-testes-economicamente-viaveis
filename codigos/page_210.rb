@@ -12,6 +12,6 @@ class EngrenagemTest < MiniTest::Unit::TestCase
                   marcha:       11,
                   roda:         DiametroDuble.new)
 
-    assert_in_delta(42.27, engrenagem.polegadas, 0.01)
+    assert_in_delta(47.27, engrenagem.polegadas, 0.01)
   end
 end
