@@ -508,3 +508,45 @@ Muitos \textit{frameworks} de teste possuem maneiras incorporadas para criação
 de dublês e \textit{stubs}. Esses mecanismos especializados podem ser
 convenientes, mas para dublês de testes simples, você pode usar objetos puros
 em Ruby, como no exemplo acima.
+
+DiametroDuble não é um \textit{mock}. É fácil acabar adquirindo o hábito de usar
+a palavra "\textit{mock}" para descrever esse dublê, mas \textit{mock} é outra
+coisa completamente diferente e será discutido nesse capítulo na sessão
+Testando Mensagens de Saída.
+
+Injetar esse dublê desacopla o teste de Engrenagem da classe Roda. Não importa
+mais se Roda é lenta, porque DiametroDuble é sempre rápido. Esse teste
+funciona bem, como mostra a execução dele.
+
+Esse teste usa um dublê de testes e assim sendo é simples, fácil, isolado e
+revelador quanto as suas intenções; o que poderia possivelmente dar errado?
+
+\subsection{Vivendo o Sonho}
+
+Imagine agora que o código é submetido as mesmas alterações que antes:
+A interface do 'Diameterizável' muda de diametro para largura e Roda é
+atualizado, mas Engrenagem não é. Essa mudança mais uma vez quebra a aplicação.
+Lembre-se que o teste anterior de Engrenagem (o qual injetou uma Roda ao invés
+de usar um dublê) notou esse problema imediatamente e começou a falhar com um
+erro de método 'diametro' não definido·
+
+Agora que você está injetando um DiametroDuble, porém, o teste continua
+passando, mesmo quando a aplicação definitivamente está quebrada. Essa aplicação
+não tem possibilidade alguma de funcionar; Engrenagem envia diametro, mas Roda
+implementa largura.
+
+Você criou um universo alternativo, um no qual testes alegremente reportam que
+tudo está bem, apesar do fato de que a aplicação está manifestamente incorreta.
+A possibilidade de criar esse universo é o que causa algumas pessoas a advertir
+que \textit{stubbing} (e \textit{mocking}) criam testes frágeis. Entretanto,
+como é sempre verdadeiro, a culpa aqui é do programador e não da ferramenta.
+Escrever código melhor requer a compreensão da causa raiz desse problema, o
+qual, por sua vez, requer um olhar mais profundo de seus componentes.
+
+A aplicação contém um papel chamado 'Diameterizável'. Esse papel originalmente
+tinha apenas um ator, Roda. Quando o teste de Engrenagem criou DiametroDuble,
+ele introduziu um segundo ator do papel. Quando a interface do papel muda,
+todos os atores do papel precisam adotar a nova interface. É fácil, no entanto,
+negligenciar atores que foram construídos especificamente para testes e foi
+exatamente isso que aconteceu aqui. Roda foi atualizado com uma nova interface,
+mas DiametroDuble não foi.
