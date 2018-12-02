@@ -476,3 +476,35 @@ seus testes claramente transmitam a ideia desse papel. Se todos os
 seus testes serem executados mais rapidamente. Se você está fazendo BDD, sua
 aplicação pode ainda não conter nenhum objeto que desempenhe esse papel, você
 pode ser forçado a manufaturar algo apenas para escrever o teste.
+
+\subsection{Criando Dublês de Teste}
+
+Esse próximo exemplo explora a ideia de criar um objeto falso, ou dublê de
+testes, para desempenhar o papel 'Diameterizável'. Para esse teste, assuma que
+a interface foi revertida para o método original diametro e que diametro está
+novamente sendo implementado por Roda e enviado por Engrenagem. A linha 2 na
+Figura \ref{img:codigo_pag_210} cria um objeto falso, DiametroDuble.
+A linha 13 injeta esse objeto falso em Engrenagem.
+
+Um dublê de testes é uma instância estilizada de um ator de um papel
+que é usado exclusivamente para testar. Dublês como esse são muito fáceis de
+serem criados, nada impede você de criar um para cada situação possível. Cada
+variante é como um rascunho de um artista. Ele realça uma única funcionalidade
+e permite que outros detalhes sobre esse objeto fiquem para trás.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_210.png}
+  \label{img:codigo_pag_210}
+\end{figure}
+
+Esse dublê é um \textit{stub} para o método diametro, ou seja, ele implementa
+uma versão de diametro que retorna uma resposta pré-determinada. DiametroDuble
+é bem limitado, mas esse é o objetivo. O fato dele retornar sempre 10 para
+diametro é perfeito. O valor retornado pelo \textit{stub} fornece uma fundação
+confiável na qual podemos construir o teste.
+
+Muitos \textit{frameworks} de teste possuem maneiras incorporadas para criação
+de dublês e \textit{stubs}. Esses mecanismos especializados podem ser
+convenientes, mas para dublês de testes simples, você pode usar objetos puros
+em Ruby, como no exemplo acima.
