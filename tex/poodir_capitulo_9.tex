@@ -360,7 +360,7 @@ desempenhando a função de 'Diameterizável'. A função é virtual, tudo está
 cabeça. Nada no código guia mantenedores futuros a pensar em Roda como um
 'Diameterizável'. Contudo, apesar da invisibilidade da função e esse
 acomplamento a Roda, estruturar o teste dessa forma tem uma vantagem muito real,
-conforme exibido na próxima sessão.
+conforme exibido na próxima seção.
 
 \section{Injetando Dependências Usando Classes}
 
@@ -511,7 +511,7 @@ em Ruby, como no exemplo acima.
 
 DiametroDuble não é um \textit{mock}. É fácil acabar adquirindo o hábito de usar
 a palavra "\textit{mock}" para descrever esse dublê, mas \textit{mock} é outra
-coisa completamente diferente e será discutido nesse capítulo na sessão
+coisa completamente diferente e será discutido nesse capítulo na seção
 Testando Mensagens de Saída.
 
 Injetar esse dublê desacopla o teste de Engrenagem da classe Roda. Não importa
@@ -550,3 +550,35 @@ todos os atores do papel precisam adotar a nova interface. É fácil, no entanto
 negligenciar atores que foram construídos especificamente para testes e foi
 exatamente isso que aconteceu aqui. Roda foi atualizado com uma nova interface,
 mas DiametroDuble não foi.
+
+\subsection{Usando Testes Para Documentar Papéis}
+
+Não é nenhuma surpresa que esse problema ocorra. O papel é quase invisível. Não
+existe um lugar na aplicação onde você possa apontar o dedo e dizer "Isso
+define um 'Diameterizável'." Quando lembrar que o papel existe é difícil,
+esquecer que dublês de teste o desempenham é inevitável.
+
+Um jeito de aumentar a visibilidade do papel é certificando-se (\textit{assert})
+que Roda o desempenha. A linha 6 na Figura \ref{img:codigo_pag_211} faz
+exatamente isso. Documenta o papel e prova que Roda implementa sua interface
+corretamente.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_211.png}
+  \label{img:codigo_pag_211}
+\end{figure}
+
+O teste \verb|implementa_a_interface_diameterizavel| introduz a ideia de testes
+para papéis, mas não é uma solução completamente satisfatória. Ela é, na
+verdade, lamentavelmente incompleta. Primeiramente, ela não pode ser
+compartilhada com outros 'Diameterizáveis'. Outros atores desse papel teriam que
+duplicar esse teste. Segundo, ela não faz nada para ajudar com o problema do
+teste de Engrenagem citado na seção "Vivendo o Sonho". Certificar-se que Roda
+desempenhe esse papel não evita que o DiametroDuble de Engrenagem fique obsoleto
+e permita que o teste de polegadas passe de modo equivocado.
+
+Felizmente, o problema de documentar e testar papéis tem uma solução simples,
+uma que será completamente coberta na seção seguinte, Provando a Exatidão dos
+Patos. Por agora, é suficiente apenas reconhecer que papéis precisam de testes
+próprios.
