@@ -625,4 +625,52 @@ Primeiramente, tais testes são redundantes. Métodos privados estão escondidos
 dentro do objeto sendo testado e não podem ser vistos por outros. Esses métodos
 são chamados por métodos públicos que já possuem testes. Um bug em um método
 privado pode certamente quebrar a aplicação no geral, mas essa falha sempre será
-exposta por um teste existente.
+exposta por um teste existente. Testar métodos privados nunca é necessário.
+
+Segundo, métodos privados são instáveis. Testes de métodos privados estão
+portanto acoplados a códigos da aplicação que são prováveis de mudarem. Quando a
+aplicação muda os testes são forçados a mudar por sua vez. É fácil criar uma
+situação onde tempo precioso é gasto executando manutenção de testes
+desnecessários.
+
+Finalmente, testes de métodos privados pode induzir outros a usa-los. Testes
+fornecem documentação sobre o objeto sendo testado. Eles irão contar uma
+história sobre como ele espera interagir com o mundo em geral. Incluir métodos
+privados nessa história distrai os leitores de seu principal propósito e os
+encoraja a quebrar o encapsulamento e depender nesses métodos. Seus testes
+deveriam esconder métodos privados, não os expor.
+
+\subsection{ Removendo Métodos Privados da Classe Sendo Testada }
+
+Uma maneira de contornar esse problema inteiro é evitar métodos privados de modo
+geral. Se você não tem métodos privados, você não precisa se preocupar com os
+testes deles.
+
+Um objeto com muitos métodos privados exala o cheiro de um \textit{design} que
+tem muitas responsabilidades. Se seu objeto tem tantos métodos privados que você
+não ousa deixa-los sem testes, considere a extração desses métodos em um novo
+objeto. Os métodos extraídos formam as responsabilidades centrais do novo
+objeto e portanto fazem parte da interface pública dele, a qual é
+(teoricamente) estável e assim seguro de depender nela.
+
+Essa estratégia é boa, mas infelizmente só é verdadeiramente útil se a nova
+interface for realmente estável. Algumas vezes a nova interface não é, e é nessa
+parte que teoria e prática se separam. Essa nova interface pública será
+exatamente tão estável (ou instável) quanto a interface privada original.
+Métodos não se tornam magicamente mais confiáveis apenas porque foram movidos.
+É custoso se acoplar a métodos instáveis, independemente se eles são
+representados como públicos ou privados.
+
+\subsection{ Escolhendo Testar um Método Privado }
+
+Tempos de grandes incertezas exigem medidas drásticas. Assim sendo de vez em
+quando é justíficavel exalar um pouco de código com mau cheiro e esconder a
+bagunça até que informações melhores cheguem. Esconder bagunças é feito
+facilmente; apenas envolva o código ofensivo em um método privado.
+
+Se você criar uma bagunça e nunca conserta-la, seus custos eventualmente irão
+subir, mas a curto prazo, para o problema certo, tendo confiança suficiente para
+escrever código vergonhoso pode economizar dinheiro. Quando sua intenção é adiar
+uma escolha de \textit{design}, faça o que for mais simples para resolver o
+problema de hoje. Isole o código atrás da melhor interface que você puder
+conceber e sente e espere por mais informações.
