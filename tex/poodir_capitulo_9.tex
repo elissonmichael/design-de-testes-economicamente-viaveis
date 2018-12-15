@@ -582,3 +582,47 @@ Felizmente, o problema de documentar e testar papéis tem uma solução simples,
 uma que será completamente coberta na seção seguinte, Provando a Exatidão dos
 Patos. Por agora, é suficiente apenas reconhecer que papéis precisam de testes
 próprios.
+
+O objetivo dessa seção foi provar as interfaces públicas através de testes das
+mensagens de entrada. Roda foi barato de testar. O teste original de Engrenagem
+foi mais caro porque dependia de um acomplamento escondido com Roda. Substituir
+essa dependência por um dependência injetada de 'Diameterizável' isolou o
+objeto sendo testado, mas criou um dilema sobre injetar um objeto real ou falso.
+
+Essa escolha entre injetar um objeto falso ou real tem consequências de longo
+alcance. Injetar os mesmo objetos nos testes que são usados em tempo de execução
+garante que os testes quebrem corretamente, mas pode levar você a ter testes que
+demoram para serem executados. De forma alternativa, injetar dublês pode
+aumentar a velocidade de execução dos testes, mas deixa-los vulnerável a criação
+de um mundo fantasioso onde testes funcionam, mas a aplicação falha.
+
+Observe que o ato de testar não forçou, por si só, nenhuma melhoria de
+\textit{design}. Nada sobre os testes te fez remover o acomplamento e injetar a
+dependência. Enquanto é verdade que a abordagem de fora para dentro do BDD
+fornece maior orientação do que a do TDD, nenhuma das práticas evitaria que um
+\textit{designer} inexperiente escrevesse Roda e então deixasse a criação de
+uma Roda embutida dentro de Engrenagem. Esse acoplamento não deixa os testes
+impossíveis, ele só aumenta custos. Reduzir o acomplamento depende de você e
+conta com sua compreensão dos princípios de \textit{design}.
+
+\section{ Testando Métodos Privados }
+
+Algumas vezes o objeto sendo testado envia mensagens a si mesmo. Mensagens
+enviadas a si mesmo chama métodos definidos na interface privada do receptor.
+Essas mensagens são como árvores proverbiais caindo em florestas vazias; elas
+não existem, ao menos com relação ao que o resto da sua aplicação está
+interessado. Porque envios de mensagens privadas não podem ser vistos fora da
+caixa preta dos objetos sendo testados, elas não precisam ser testadas no mundo
+intocado do \textit{design} idealizado.
+
+No entanto, o mundo real não é tão arrumado e essa regra simples não satisfaz
+completamente. Lidar com mensagens privadas requer julgamento e flexibilidade.
+
+\subsection{ Ignorando Métodos Privados Durante Testes }
+
+Existem muitas razões excelentes para se omitir testes de métodos privados.
+Primeiramente, tais testes são redundantes. Métodos privados estão escondidos
+dentro do objeto sendo testado e não podem ser vistos por outros. Esses métodos
+são chamados por métodos públicos que já possuem testes. Um bug em um método
+privado pode certamente quebrar a aplicação no geral, mas essa falha sempre será
+exposta por um teste existente.
