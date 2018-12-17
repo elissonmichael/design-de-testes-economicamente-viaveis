@@ -674,3 +674,52 @@ escrever código vergonhoso pode economizar dinheiro. Quando sua intenção é a
 uma escolha de \textit{design}, faça o que for mais simples para resolver o
 problema de hoje. Isole o código atrás da melhor interface que você puder
 conceber e sente e espere por mais informações.
+
+Aplicar essa estratégia pode resultar em métodos privados que são
+descontroladamente instáveis. Depois que você deu esse pulo, é razoável que
+você considere ajustar seu pecados ao testar esse métodos instáveis. O
+código da aplicação é feio e irá sofrer mudanças frequentes. O risco de quebrar
+algo estará sempre presente. Esses testes serão custosos e provavelmente serão
+forçados a mudar em conjunto com o código subjacente, mas qualquer outras opções
+para manter as coisas funcionando possivelmente serão mais caras.
+
+Esses testes de métodos privados não são necessários para se saber que uma
+mudança quebrou algo. Os testes das interfaces públicas ainda servem esse
+propósito de forma admirável. Testes de método privados produzem mensagens de
+erros que localizam com precisão as partes do código privado que estão falhando.
+Esses erros mais específicos geram acomplamentos fortes que aumentam os custos
+de manutenção, mas eles tornam mais fácil compreender os efeitos das mudanças e
+dessa forma eles removem parte da dor de reforatorar código privado complexo.
+
+Reduzir as barreiras para refatoração é importante, porque refatorar você irá.
+Esse é o objetivo final. A bagunça é temporária, você pretende refatorar e se
+livrar dela. Como mais informações de \textit{design} chegarão, esse métodos
+privados irão melhorar. Uma vez que a neblina suma e um \textit{design} se
+revele, os métodos se tornarão mais estáveis. Conforme a estabilidade aumenta,
+o custo da manutenção e a necessidade para os testes irão diminuir.
+Eventualmente será possível extrair os métodos privados em uma classe separada
+e revelar eles para o mundo.
+
+As regras de ouro para testes de métodos privados são estas: Nunca os escreva, e
+se você o fizer, jamais os teste, a menos, claro, que isso faça sentido.
+Assim sendo, esteja inclinado contra escrever esses testes, mas não tenha medo
+de o fazer se isso melhorar a sua parte.
+
+\subsection{ Testando Mensagens de Saída }
+
+Mensagens de saída, como você sabe da seção "O que Testar", são ou consultas
+(\textit{queries}) ou comandos. Mensagens de consulta são importantes apenas
+para o objeto que as envia, enquanto mensagens de comando têm efeitos que são
+visíveis para outros objetos na sua aplicação.
+
+\subsection{ Ignorando Mensagens de Consulta }
+
+Mensagens que não têm efeitos colaterais são conhecidas como mensagens de
+consulta. Aqui está um exemplo simples, onde o método polegadas de Engrenagem
+envia a mensagem diametro.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_215.png}
+  \label{img:codigo_pag_215}
+\end{figure}
