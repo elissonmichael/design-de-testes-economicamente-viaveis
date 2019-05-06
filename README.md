@@ -7,14 +7,14 @@ Esse trabalho é a minha tradução do Capítulo 9 do livro de Sandi Metz - Prac
 Para poder compilar, algumas dependências devem ser instaladas no seu sistema.
 As dependências são baseadas na distribuição Linux Ubuntu.
 
-  sudo apt-get install texlive-latex-base abntex texlive-fonts-recommended texlive-lang-portuguese
+  `sudo apt-get install texlive-latex-base abntex texlive-fonts-recommended texlive-lang-portuguese`
 
 # Compilando
 
 Para compilar, depois ter instalado as dependências, basta rodar o comando `make pdf`.
 
-Se encontrar o erro `LaTeX Error: File fncychap.sty not found.`, instale também.
+Se encontrar o **erro** `LaTeX Error: File fncychap.sty not found.`, instale também.
 
-  sudo apt-get install latexmk texlive texlive-science texlive-formats-extra
+  `sudo apt-get install latexmk texlive texlive-science texlive-formats-extra`
 
 Antes de efetuar um commit rode o comando `make clean` para remover arquivos temporários (e o pdf).

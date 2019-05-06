@@ -1,5 +1,7 @@
 \Chapter{\textit{Design} de Testes Economicamente Viáveis}
 
+Tradução de Élisson Michael Fernandes Meirelles Araújo. Disponível em: \url{github.com/elissonmichael/design-de-testes-economicamente-viaveis}
+
 \cite{Sandi} afirma que escrever código que muda é uma arte a qual a prática depende de três habilidades diferentes.
 
 Primeiro, você precisa entender \textit{design} orientado a objetos. Código com \textit{design} pobre é naturalmente difícil de alterar. De um ponto de vista prático, a capacidade de alteração é a única métrica de \textit{design} que importa; código que é fácil de mudar tem um bom \textit{design}. Se você chegou até aqui é justo supor que você já tem uma base pela qual começar a praticar a escrita de código fácil de alterar.
@@ -722,4 +724,24 @@ envia a mensagem diametro.
   \center
   \includegraphics[scale=0.50]{imagens/codigo_pag_215.png}
   \label{img:codigo_pag_215}
+\end{figure}
+
+Nada na aplicação, além do método polegadas, se importa que a mensagem diametro seja enviada. O método diametro não tem efeitos colaterais, executar essa função não deixa nenhum rastro visível e nenhum outro objeto depende em sua execução.
+
+Da mesma forma que testes deveriam ignorar mensagens enviadas para si mesmo (self), eles também deveriam ignorar mensagem de consulta (query). As consequências de enviar a mensagem diametro estão escondidas dentro de Engrenagem. Porque a aplicação, no geral, não precisa que esssa mensagem seja enviada, seus testes não precisam se importar.
+
+O método polegadas de Engrenagem depende do resultado que o método diametro retorna, mas os testes que provam que essa função está correta pertencem a classe Roda, não aqui na classe Engrenagem. É redundante para Engrenagem duplicar esses testes, o custo de manutenção vai aumentar se ele o fizer. A única responsabilidade de Engrenagem é provar que polegadas funciona corretamente e isso pode ser feito simplesmente testando que polegadas sempre retorna os resultados apropriados.
+
+\subsection{ Provando Mensagens de Comando }
+
+Algumas vezes, no entanto, é importante que uma mensagem seja enviada, outras partes da sua aplicação dependem de alguma coisa que acontece como resultado. Nesse caso, o objeto sendo testado é responsável por enviar a mensagem e seus testes precisam provar que ele o faz.
+
+Ilustrar esse problema requer um exemplo novo. Imagine um jogo onde jogadores correm com bicicletas virtuais. Essas bicicletas, evidentemente, possuem engrenagens. A classe Engrenagem agora é responsável por deixar a aplicação sabendo quando o jogador troca de marcha, de forma que o restante da aplicação possa atualizar o comportamente da bicicleta.
+
+No código seguinte, Engrenagem recebe esse novo requisito ao adicionar um observador (observer). Quando um jogador trocar de marcha, os métodos estabelecer marcha e estabelecer roda dentada são executados. Esses métodos salvam o novo valor e chamam a função mudou (linha 20). Esse método então envia a mensagem mudou para o observador, passando a marcha e roda dentada atuais como parâmetros.
+
+\begin{figure}[!htbp]
+  \center
+  \includegraphics[scale=0.50]{imagens/codigo_pag_216.png}
+  \label{img:codigo_pag_216}
 \end{figure}
