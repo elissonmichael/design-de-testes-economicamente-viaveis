@@ -745,3 +745,11 @@ No código seguinte, Engrenagem recebe esse novo requisito ao adicionar um obser
   \includegraphics[scale=0.50]{imagens/codigo_pag_216.png}
   \label{img:codigo_pag_216}
 \end{figure}
+
+Engrenagem tem uma nova responsabilidade. Ela precisa notificar observador quando \underline{marcha} e \underline{roda dentada} mudarem. Essa nova responsabilidade é tão importante quanto sua obrigação anterior de calcular \underline{polegadas}. Quando um jogador trocar de marcha, a aplicação só vai estar correta se Engrenagem enviar a mensagem \underline{mudou} para \underline{observador}. Seus testes deveriam provar que essa mensagem é enviada.
+
+Eles não deveriam apenas provar isso, mas eles também deveriam fazer isso sem afirmar (\textit{assert}) nada sobre o resultado de retorno do método \underline{mudou} de \underline{observador}. Assim como os testes de Roda alegaram serem os únicos responsáveis por fazer afirmações sobre os resultados de seus próprios métodos, os testes de \underline{observador} são os únicos que devem fazer afirmações sobre os resultados de seu método \underline{mudou}. A responsabilidade de testar o valor de retorno de uma mensagem existe apenas no receptor. Adicionar essa responsabilidade em qualquer outro lugar duplica os testes e aumenta os custos.
+
+Para evitar duplicações você precisa de um jeito de provar que Engrenagem envia a mensagem \underline{mudou} para \underline{observador} de uma forma que não te faça depender de ter que checar o que é retornado quando a mensagem for enviada.  Felizmente, isso é fácil, você precisa de uma imitação (\textit{mock}). \textit{Mocks} são testes de comportamento, o oposto de testes de estado. Ao invés de fazer afirmações sobre o retorno de uma mensagem, \textit{mocks} definem uma expectativa de que a mensagem será enviada.
+
+O teste abaixo prova que Engrenagem cumpre suas responsabilidades e o teste faz isso sem ficar acomplado aos detalhes de como \underline{observador} se comporta. O teste cria um \textit{mock} (linha 4) que é injetado no lugar do \underline{observador} (linha 8). Cada método do teste diz ao \textit{mock} para esperar o recebimento da mensagem \underline{mudou} (linhas 12 e 17) e então verifica que isso aconteceu (linhas 14 e 20).
