@@ -66,7 +66,7 @@ Conforme a base de código cresce e o número de abstrações aumenta, testes se
 
 \subsection{Expondo Falhas de \textit{Design}}
 
-O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outro objetos irão achar difícil reutilizar o código.
+O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacimgente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outro objetos irão achar difícil reutilizar o código.
 
 Quando o \textit{design} é ruim, testar é difícil. No entanto, não é garantido que o inverso seja verdade. Testes custosos não necessariamente significam que a aplicação tem \textit{design} pobre. É tecnicamente possível escrever testes ruins para código com bom \textit{design}. Assim sendo, para testes diminuírem seus custos, tanto a aplicação subjacente e os testes precisam ter bom \textit{design}.
 
@@ -752,4 +752,19 @@ Eles não deveriam apenas provar isso, mas eles também deveriam fazer isso sem 
 
 Para evitar duplicações você precisa de um jeito de provar que Engrenagem envia a mensagem \underline{mudou} para \underline{observador} de uma forma que não te faça depender de ter que checar o que é retornado quando a mensagem for enviada.  Felizmente, isso é fácil, você precisa de uma imitação (\textit{mock}). \textit{Mocks} são testes de comportamento, o oposto de testes de estado. Ao invés de fazer afirmações sobre o retorno de uma mensagem, \textit{mocks} definem uma expectativa de que a mensagem será enviada.
 
-O teste abaixo prova que Engrenagem cumpre suas responsabilidades e o teste faz isso sem ficar acomplado aos detalhes de como \underline{observador} se comporta. O teste cria um \textit{mock} (linha 4) que é injetado no lugar do \underline{observador} (linha 8). Cada método do teste diz ao \textit{mock} para esperar o recebimento da mensagem \underline{mudou} (linhas 12 e 17) e então verifica que isso aconteceu (linhas 14 e 20).
+O teste na Figura \ref{img:codigo_pag_217} prova que Engrenagem cumpre suas responsabilidades e o teste faz isso sem ficar acomplado aos detalhes de como \underline{observador} se comporta. O teste cria um \textit{mock} (linha 4) que é injetado no lugar do \underline{observador} (linha 8). Cada método do teste diz ao \textit{mock} para esperar o recebimento da mensagem \underline{mudou} (linhas 12 e 18) e então verifica que isso aconteceu (linhas 14 e 20).
+
+\begin{figure}[!htbp]
+  \center
+  \caption{Configurando Expectativas em um Mock}
+  \includegraphics[scale=0.50]{imagens/codigo_pag_217.png}
+  \label{img:codigo_pag_217}
+\end{figure}
+
+Esse é o padrão de a utilização clássica para um \textit{mock}. No método \underline{test notifica} observador \underline{quando marcha muda} acima, a linha 12 diz ao \textit{mock} qual a mensagem esperar, linha 13 server como gatilho para ativar o comportamento que deveria causar a expectativa a ser cumprida, para então a linha 14 pedir para o \textit{mock} verificar que de fato foi cumprida. O teste \textbf{passa} apenas se o envio da mensagem \underline{estabelecer marcha} para engrenagem fizer alguma coisa que cause o recebimento da mensagem \underline{mudou} pelo objeto \underline{observador} com os argumentos passados.
+
+Observe que tudo que o \textit{mock} fez com a mensagem foi lembrar que a recebeu. Se o objeto sendo testado depende do resultado que é retornado quando o observador recebe a mensagem \underline{mudou}, o \textit{mock} pode ser configurado para retornar um valor adequado. Esse valor retonado, no entanto, está além do ponto principal. \textit{Mocks} são feitos para provar que mensagem são enviadas, eles retornam valores apenas quando isso é necessário para que os testes rodem.
+
+O fato de Engrenagem funcionar bem mesmo depois que você imitou (\textit{mock}) o método \underline{mudou} de \underline{observador}, de forma que ele não faça nada, prova que Engrenagem não se importa com o que o método realmente faz. A única responsabilidade de Engrenagem é a de enviar a mensagem, esse teste deveria se restringir a demonstrar que Engrenagem o faz.
+
+Em uma aplicação com bom \textit{design}, testar mensagem de saidas é simples. Se você estiver injetando dependências proativamente, você pode facilmente substituir por \textit{mocks}. Configurar expectativas nesses \textit{mocks} permite que você prove que o objeto sendo testado cumpre suas responsabilidades sem duplicar afirmações \textit{assertions} que pertencem em outro lugar.
