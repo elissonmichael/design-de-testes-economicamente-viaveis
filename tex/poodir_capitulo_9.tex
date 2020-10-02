@@ -10,7 +10,7 @@ Segundo, você deve ser habilidoso em refatoração de código. Não no sentido 
 
 \say{Refatoração é o processo de mudar um sistema de software de um modo que não altere o comportamento externo do código, mas melhore a estrutura interna.}
 
-Repare na parte \textit{não altere o comportamento externo do código}. Refatorar, em sua definição formal, não adiciona novo comportamento, ele melhora a estrutura existente. É um processo preciso que altera código via passos muito pequenos, cuidadosos, incrementais que infalivelmente transforma um \textit{design} em outro.
+Repare na parte \textit{não altere o comportamento externo do código}. Refatorar, em sua definição formal, não adiciona novo comportamento, ele melhora a estrutura existente. É um processo preciso que altera código via passos muito pequenos, cuidadosos e incrementais, que infalivelmente transformam um \textit{design} em outro.
 
 Bom \textit{design} preserva flexibilidade máxima no menor custo ao adiar decisões a cada oportunidade. Postergando qualquer comprometimento até que requerimentos mais específicos cheguem. Quando esse dia chegar, será através da refatoração que você vai transformar a estrutura atual do código em uma que acomodará os novos requerimentos. Novas \textit{features} serão adicionadas apenas depois que você tiver refatorado o código com sucesso.
 
@@ -36,13 +36,13 @@ A solução para o problema de testes custosos, no entanto, não é parar de tes
 
 \section{Conhecendo as suas Intenções}
 
-Testar tem muito benefícios em potencial, alguns óbvios, outros mais obscuros. Uma compreensão completa desses benefícios vai aumentar a sua motivação para alcança-los.
+Testar tem muitos benefícios em potencial, alguns óbvios, outros mais obscuros. Uma compreensão completa desses benefícios vai aumentar a sua motivação para alcançá-los.
 
 \subsection{Encontrando \textit{bugs}}
 
 Encontrar falhas, ou \textit{bugs}, cedo no processo de desenvolvimento rendem grandes dividendos. Não apenas é mais fácil encontrar e corrigir um \textit{bug} quanto mais próximo da sua época de criação, mas conseguir o código certo mais cedo do que mais tarde pode ter um efeito positivo não esperado no \textit{design} resultante.
 
-Saber que você pode (ou não pode) fazer algo mais cedo talvez façam você escolher alternativas no dia presente que alteram as opções de \textit{design} disponíveis no futuro. Além disso, conforme o código se acumula, \textit{bugs} incorporados acumulam dependências. Corrigir esses \textit{bugs} mais tarde no processo pode necessitar da mudança de muito código com dependências. Corrigir esses \textit{bugs} mais cedo sempre custa menos.
+Saber que você pode (ou não pode) fazer algo mais cedo talvez faça você escolher alternativas no dia presente que alteram as opções de \textit{design} disponíveis no futuro. Além disso, conforme o código se acumula, \textit{bugs} incorporados acumulam dependências. Corrigir esses \textit{bugs} mais tarde no processo pode exigir mudança de muito código dependente. Corrigir esses \textit{bugs} mais cedo sempre custa menos.
 
 \subsection{Fornecimento de Documentação}
 
@@ -66,9 +66,9 @@ Conforme a base de código cresce e o número de abstrações aumenta, testes se
 
 \subsection{Expondo Falhas de \textit{Design}}
 
-O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacimgente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outro objetos irão achar difícil reutilizar o código.
+O próximo benefício de testes é que eles expõem falhas de \textit{design} no código subjacente. Se um teste requer um configuração trabalhosa, o código espera muito contexto. Se testar um objeto traz um monte de outros objetos, o código tem muitas dependências. Se o teste é difícil de escrever, outros objetos irão achar difícil reutilizar o código.
 
-Quando o \textit{design} é ruim, testar é difícil. No entanto, não é garantido que o inverso seja verdade. Testes custosos não necessariamente significam que a aplicação tem \textit{design} pobre. É tecnicamente possível escrever testes ruins para código com bom \textit{design}. Assim sendo, para testes diminuírem seus custos, tanto a aplicação subjacente e os testes precisam ter bom \textit{design}.
+Quando o \textit{design} é ruim, testar é difícil. No entanto, não é garantido que o inverso seja verdade. Testes custosos não necessariamente significam que a aplicação tem \textit{design} pobre. É tecnicamente possível escrever testes ruins para código com bom \textit{design}. Assim sendo, para testes diminuírem seus custos, tanto a aplicação subjacente quanto os testes precisam ter bom \textit{design}.
 
 Seu objetivo é ganhar todos os benefícios dos testes pelo menor custo possível. O melhor jeito de alcançar esse objetivo é escrever testes fracamente acoplados apenas sobre as coisas que importam.
 
@@ -91,7 +91,7 @@ Objetos com bom \textit{design} têm fronteiras que são fortes. Cada um é como
 
 Essa ignorância da parte interna de todos os outros objetos é a parte central do \textit{design}. Lidar com objetos como se eles fossem apenas e exatamente as mensagens as quais eles respondem permite que você faça o \textit{design} de uma aplicação que é alterável, e é o seu entendimento sobre a importância dessa perspectiva que vai permitir que você crie testes que fornecem o máximo de benefício com o mínimo de custo.
 
-Os princípios de \textit{design} que você está impondo a sua aplicação também se aplicam aos seus testes. Cada teste é meramente outro objeto da aplicação que precisa usar uma classe existente. Quanto mais o teste fica acoplado aquela classe, mais emaranhado os dois se tornam e mais vulnerável o teste se torna a ser forçado a mudar desnecessariamente.
+Os princípios de \textit{design} que você está impondo a sua aplicação também se aplicam aos seus testes. Cada teste é meramente outro objeto da aplicação que precisa usar uma classe existente. Quanto mais o teste fica acoplado à aquela classe, mais emaranhado os dois se tornam e mais vulnerável o teste se torna a ser forçado a mudar desnecessariamente.
 
 Não apenas você deveria limitar o acoplamento, mas os poucos que você permite deveriam ser a coisas estáveis. A coisa mais estável sobre qualquer objeto é a sua interface pública; segue-se logicamente que os testes que você escreve devem ser para mensagens que são definidas nas interfaces públicas. Os testes mais custosos e inúteis são aqueles que abrem um buraco nas paredes de contenção de um objeto ao se acoplarem a detalhes internos instáveis. Esses testes ansiosos provam nada sobre exatidão no geral de uma aplicação, mas no entanto aumentam custos porque eles quebram a cada refatoração da classe por baixo.
 
